@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<script src="js/jquery-1.10.2.min.js"></script>
+<title>Demo</title>
+</head>
+<body>
+	<div id="console1"></div>
+	<div id="console2"></div>
+	<script>
+		//alert('');
+		$(function() {
+			$.ajax({
+				method : 'GET',
+				url : '/hello',
+				headers : {
+					'Service-Name' : 'CRHelloService'
+				},
+				success : function(data) {
+					$('#console1').text('成功：'+data);
+				}
+			});
+		});
+		$(function() {
+			$.ajax({
+				method : 'GET',
+				url : '/hello',
+				headers : {
+					'Service-Name' : 'MOHelloService'
+				},
+				success : function(data) {
+					$('#console2').text('成功：'+data);
+				},
+				error:function (XMLHttpRequest, textStatus, errorThrown) {
+					  // 通常情况下textStatus和errorThown只有其中一个有值 
+					  $('#console2').text('MO service failure!');; // the options for this ajax request
+					}
+			});
+		});
+	</script>
+</body>
+</html>
