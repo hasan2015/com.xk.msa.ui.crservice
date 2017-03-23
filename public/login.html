@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html >
+<head>
+<meta charset="UTF-8">
+<script src="js/jquery-1.10.2.min.js"></script>
+<title>Demo</title>
+</head>
+<body>
+	<div id="console1"></div>
+	<div id="console2"></div>
+ 
+	<script>
+		var token;
+		//alert('');
+		$(function() {
+			$.ajax({
+				method : 'POST',
+				url : '/api/xkauth/login',
+				cache : 'false',
+				dataType : 'json',
+				contentType : 'application/json',
+				data : '{"username":"admin@101","password":"62C8AD0A15D9D1CA38D5DEE762A16E01"}',
+				headers : {
+					'Service-Name' : 'com.xk.msa.caservice'
+				},
+				success : function(data) {
+					$('#console1').text('token：' + data.token);
+					$('#console2').text('refreshToken：' + data.refreshToken);
+					token = data;
+				},
+				error:function(err){
+					$('#console1').text('error：' + err);
+				}
+			});
+		});
+		
+	</script>
+</body>
+</html>
